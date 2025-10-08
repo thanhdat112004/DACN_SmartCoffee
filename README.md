@@ -139,3 +139,111 @@ CREATE TABLE Booking_Logs (
     UserID INT,  -- Người thực hiện hành động
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
+
+-- Dữ liệu mẫu cho bảng Roles
+INSERT INTO Roles (RoleName) VALUES ('Khách hàng');
+INSERT INTO Roles (RoleName) VALUES ('Quản lý');
+INSERT INTO Roles (RoleName) VALUES ('Nhân viên');
+GO
+
+-- Dữ liệu mẫu cho bảng Users
+INSERT INTO Users (FullName, Email, PhoneNumber, PasswordHash, RoleID) 
+VALUES ('Nguyễn Văn A', 'nguyenva@gmail.com', '0901234567', 'hashedpassword1', 1);  -- Khách hàng
+
+INSERT INTO Users (FullName, Email, PhoneNumber, PasswordHash, RoleID) 
+VALUES ('Lê Thị B', 'lethi.b@admin.com', '0907654321', 'hashedpassword2', 2);  -- Quản lý
+
+INSERT INTO Users (FullName, Email, PhoneNumber, PasswordHash, RoleID) 
+VALUES ('Trần Văn C', 'tranvanc@staff.com', '0912345678', 'hashedpassword3', 3);  -- Nhân viên
+GO
+
+-- Dữ liệu mẫu cho bảng Branches
+INSERT INTO Branches (BranchName, Location, PhoneNumber) 
+VALUES ('Cà Phê Sài Gòn', 'Quận 1, TP.HCM', '02812345678');
+
+INSERT INTO Branches (BranchName, Location, PhoneNumber) 
+VALUES ('Cà Phê Hà Nội', 'Quận Hoàn Kiếm, Hà Nội', '02498765432');
+GO
+
+-- Dữ liệu mẫu cho bảng Tables
+INSERT INTO Tables (BranchID, TableNumber, Area, Status, Capacity) 
+VALUES (1, 1, 'Cửa sổ', 'Available', 4);
+
+INSERT INTO Tables (BranchID, TableNumber, Area, Status, Capacity) 
+VALUES (1, 2, 'Yên tĩnh', 'Reserved', 2);
+
+INSERT INTO Tables (BranchID, TableNumber, Area, Status, Capacity) 
+VALUES (2, 1, 'Sân ngoài', 'Occupied', 6);
+GO
+
+-- Dữ liệu mẫu cho bảng Reservations
+INSERT INTO Reservations (CustomerID, BranchID, TableID, ReservationDate, NumberOfPeople, AreaPreference, Status) 
+VALUES (1, 1, 1, '2025-10-10 10:00:00', 2, 'Cửa sổ', 'Confirmed');
+
+INSERT INTO Reservations (CustomerID, BranchID, TableID, ReservationDate, NumberOfPeople, AreaPreference, Status) 
+VALUES (2, 1, 2, '2025-10-11 18:00:00', 4, 'Yên tĩnh', 'Pending');
+GO
+
+-- Dữ liệu mẫu cho bảng Payments
+INSERT INTO Payments (ReservationID, Amount, PaymentMethod, PaymentStatus, PaidAt) 
+VALUES (1, 150000, 'MoMo', 'Success', '2025-10-10 09:00:00');
+
+INSERT INTO Payments (ReservationID, Amount, PaymentMethod, PaymentStatus, PaidAt) 
+VALUES (2, 250000, 'PayPal', 'Failed', '2025-10-11 17:30:00');
+GO
+
+-- Dữ liệu mẫu cho bảng Loyalty
+INSERT INTO Loyalty (CustomerID, Points, LastUpdated) 
+VALUES (1, 500, '2025-10-10 10:30:00');
+
+INSERT INTO Loyalty (CustomerID, Points, LastUpdated) 
+VALUES (2, 1200, '2025-10-11 18:30:00');
+GO
+
+-- Dữ liệu mẫu cho bảng MenuItems
+INSERT INTO MenuItems (Name, Description, Price, Category) 
+VALUES ('Cà phê sữa đá', 'Cà phê đá với sữa đặc', 35000, 'Drink');
+
+INSERT INTO MenuItems (Name, Description, Price, Category) 
+VALUES ('Bánh mì ốp la', 'Bánh mì với trứng và xúc xích', 25000, 'Food');
+GO
+
+-- Dữ liệu mẫu cho bảng Staff
+INSERT INTO Staff (FullName, Role, BranchID, Email, PhoneNumber) 
+VALUES ('Nguyễn Thị D', 'Manager', 1, 'nguyenthid@cafe.com', '0909876543');
+
+INSERT INTO Staff (FullName, Role, BranchID, Email, PhoneNumber) 
+VALUES ('Trần Minh E', 'Waiter', 2, 'tranminhe@cafe.com', '0906543210');
+GO
+
+-- Dữ liệu mẫu cho bảng Notifications
+INSERT INTO Notifications (CustomerID, NotificationType, Message, SentAt, Status) 
+VALUES (1, 'Reminder', 'Nhắc nhở về đặt bàn tại Cà Phê Sài Gòn', '2025-10-10 08:30:00', 'Sent');
+
+INSERT INTO Notifications (CustomerID, NotificationType, Message, SentAt, Status) 
+VALUES (2, 'Confirmation', 'Đặt bàn thành công tại Cà Phê Hà Nội', '2025-10-11 17:00:00', 'Sent');
+GO
+
+-- Dữ liệu mẫu cho bảng AI_Predictions
+INSERT INTO AI_Predictions (BranchID, PredictionDate, PredictedSeats, HeatmapData) 
+VALUES (1, '2025-10-10 09:00:00', 50, 'Heatmap data for Sài Gòn');
+
+INSERT INTO AI_Predictions (BranchID, PredictionDate, PredictedSeats, HeatmapData) 
+VALUES (2, '2025-10-11 09:00:00', 30, 'Heatmap data for Hà Nội');
+GO
+
+-- Dữ liệu mẫu cho bảng Feedback
+INSERT INTO Feedback (CustomerID, BranchID, Rating, Comment, CreatedAt) 
+VALUES (1, 1, 5, 'Quán rất đẹp và nhân viên phục vụ tốt!', '2025-10-10 10:30:00');
+
+INSERT INTO Feedback (CustomerID, BranchID, Rating, Comment, CreatedAt) 
+VALUES (2, 2, 4, 'Món ăn khá ngon nhưng giá hơi cao.', '2025-10-11 18:45:00');
+GO
+
+-- Dữ liệu mẫu cho bảng Booking_Logs
+INSERT INTO Booking_Logs (ActionType, ActionDetails, ActionDate, UserID) 
+VALUES ('Create', 'Đặt bàn cho 2 người tại chi nhánh Cà Phê Sài Gòn, bàn cửa sổ', '2025-10-10 09:30:00', 1);
+
+INSERT INTO Booking_Logs (ActionType, ActionDetails, ActionDate, UserID) 
+VALUES ('Payment', 'Thanh toán 150.000đ qua MoMo', '2025-10-10 09:50:00', 1);
+GO
