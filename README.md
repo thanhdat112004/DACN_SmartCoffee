@@ -659,3 +659,27 @@ JOIN Branch br ON br.BranchId=o.BranchId
 WHERE b.Status='PAID'
 GROUP BY CAST(b.CreatedUtc AT TIME ZONE 'Se Asia Standard Time' AS DATE), br.Code;
 GO
+
+USE SmartBookingCafe;
+IF OBJECT_ID('OtpCode') IS NULL
+CREATE TABLE OtpCode (
+  Id        INT IDENTITY(1,1) PRIMARY KEY,
+  UserId    INT NOT NULL,
+  Code      VARCHAR(10) NOT NULL,
+  Purpose   VARCHAR(20) NOT NULL, -- LOGIN/REGISTER/RESET
+  ExpireUtc DATETIME2 NOT NULL,
+  IsUsed    BIT NOT NULL DEFAULT 0,
+  CreatedUtc DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+  FOREIGN KEY (UserId) REFERENCES [User](UserId)
+);
+
+IF OBJECT_ID('PasswordResetToken') IS NULL
+CREATE TABLE PasswordResetToken (
+  Id        INT IDENTITY(1,1) PRIMARY KEY,
+  UserId    INT NOT NULL,
+  Token     VARCHAR(64) NOT NULL,
+  ExpireUtc DATETIME2 NOT NULL,
+  IsUsed    BIT NOT NULL DEFAULT 0,
+  CreatedUtc DATETIME2 NOT NULL DEFAULT SYSUTCDATETIME(),
+  FOREIGN KEY (UserId) REFERENCES [User](UserId)
+);
