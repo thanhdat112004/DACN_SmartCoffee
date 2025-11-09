@@ -1,0 +1,105 @@
+@{
+    Layout = null;
+    var displayName = string.IsNullOrWhiteSpace(ViewBag.UserName as string) ? "Coffee Lover" : (string)ViewBag.UserName;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Coffee Blend | Thông tin cá nhân</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
+
+    <link rel="stylesheet" href="~/css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/animate.css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/css/aos.css">
+    <link rel="stylesheet" href="~/css/ionicons.min.css">
+    <link rel="stylesheet" href="~/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="~/css/jquery.timepicker.css">
+    <link rel="stylesheet" href="~/css/flaticon.css">
+    <link rel="stylesheet" href="~/css/icomoon.css">
+    <link rel="stylesheet" href="~/css/style.css">
+  </head>
+  <body>
+    @await Html.PartialAsync("_TopNav")
+
+    <section class="home-slider owl-carousel">
+      <div class="slider-item" style="background-image: url(~/images/bg_2.jpg);" data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row slider-text justify-content-center align-items-center">
+            <div class="col-md-8 text-center ftco-animate">
+              <span class="subheading">Welcome back</span>
+              <h1 class="mb-4">Trang cá nhân</h1>
+              <p class="breadcrumbs"><span class="mr-2"><a asp-controller="Home" asp-action="Index">Home</a></span> <span>Profile</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section bg-light">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <div class="ftco-bg-dark p-5 text-center text-md-left">
+              <div class="d-flex align-items-center mb-4">
+                <span class="icon-user mr-3 text-white" style="font-size: 2rem;"></span>
+                <div>
+                  <h3 class="text-white mb-1">@displayName</h3>
+                  <p class="text-white-50 mb-0">Thành viên Coffee Blend</p>
+                </div>
+              </div>
+              <div class="border-top border-bottom border-secondary py-4 my-4">
+                <p class="text-white-50 mb-2"><span class="icon-mail_outline mr-2"></span> coffee@blend.com</p>
+                <p class="text-white-50 mb-2"><span class="icon-phone mr-2"></span> 09xx xxx xxx</p>
+                <p class="text-white-50 mb-0"><span class="icon-location-pin mr-2"></span> 198 West 21th Street, Suite 721 New York NY 10016</p>
+              </div>
+              <div class="d-flex flex-column flex-md-row justify-content-between">
+                <a asp-controller="Auth" asp-action="Register" class="btn btn-outline-light mb-2 mb-md-0">Cập nhật hồ sơ</a>
+                <a asp-controller="Auth" asp-action="Logout" class="btn btn-primary">Đăng xuất</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="ftco-footer ftco-section img">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p class="mb-0 text-white">© <script>document.write(new Date().getFullYear());</script> Coffee Blend. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" /><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
+
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.easing.1.3.js"></script>
+    <script src="~/js/jquery.waypoints.min.js"></script>
+    <script src="~/js/jquery.stellar.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/js/aos.js"></script>
+    <script src="~/js/jquery.animateNumber.min.js"></script>
+    <script src="~/js/bootstrap-datepicker.js"></script>
+    <script src="~/js/jquery.timepicker.min.js"></script>
+    <script src="~/js/scrollax.min.js"></script>
+    <script src="~/js/main.js"></script>
+  </body>
+</html>
+

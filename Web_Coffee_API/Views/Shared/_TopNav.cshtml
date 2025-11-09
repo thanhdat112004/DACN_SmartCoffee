@@ -1,0 +1,65 @@
+@using System.Linq
+@{
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
+    var shopActions = new[] { "Shop", "ProductSingle", "Cart", "Checkout" };
+    var blogActions = new[] { "Blog", "BlogSingle" };
+
+    bool isShopSection = currentAction != null && shopActions.Contains(currentAction);
+    bool isBlogSection = currentAction != null && blogActions.Contains(currentAction);
+    bool isAuthenticated = ViewBag.IsAuthenticated as bool? ?? false;
+    string userName = string.IsNullOrWhiteSpace(ViewBag.UserName as string) ? "Coffee Lover" : (string)ViewBag.UserName;
+}
+
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+        <a class="navbar-brand" asp-controller="Home" asp-action="Index">Coffee<small>Blend</small></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="oi oi-menu"></span> Menu
+        </button>
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item @(currentAction == "Index" ? "active" : string.Empty)"><a asp-controller="Home" asp-action="Index" class="nav-link">Home</a></li>
+                <li class="nav-item @(currentAction == "Menu" ? "active" : string.Empty)"><a asp-controller="Home" asp-action="Menu" class="nav-link">Menu</a></li>
+                <li class="nav-item @(currentAction == "Services" ? "active" : string.Empty)"><a asp-controller="Home" asp-action="Services" class="nav-link">Services</a></li>
+                <li class="nav-item @(isBlogSection ? "active" : string.Empty)"><a asp-controller="Home" asp-action="Blog" class="nav-link">Blog</a></li>
+                <li class="nav-item @(currentAction == "About" ? "active" : string.Empty)"><a asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
+                <li class="nav-item dropdown @(isShopSection ? "active" : string.Empty)">
+                    <a class="nav-link dropdown-toggle" asp-controller="Home" asp-action="Shop" id="navbarDropdownShop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownShop">
+                        <a class="dropdown-item" asp-controller="Home" asp-action="Shop">Shop</a>
+                        <a class="dropdown-item" asp-controller="Home" asp-action="ProductSingle">Single Product</a>
+                        <a class="dropdown-item" asp-controller="Home" asp-action="Cart">Cart</a>
+                        <a class="dropdown-item" asp-controller="Home" asp-action="Checkout">Checkout</a>
+                    </div>
+                </li>
+                <li class="nav-item @(currentAction == "Contact" ? "active" : string.Empty)"><a asp-controller="Home" asp-action="Contact" class="nav-link">Contact</a></li>
+                <li class="nav-item dropdown">
+                    @if (isAuthenticated)
+                    {
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdownAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="icon-user mr-2"></span><span>@userName</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownAccount">
+                            <a class="dropdown-item" asp-controller="Auth" asp-action="Profile">Thông tin cá nhân</a>
+                            <a class="dropdown-item" asp-controller="Auth" asp-action="Logout">Đăng xuất</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAccount" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Tài khoản
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownAccount">
+                            <a class="dropdown-item" asp-controller="Auth" asp-action="Login">Đăng nhập</a>
+                            <a class="dropdown-item" asp-controller="Auth" asp-action="Register">Đăng ký</a>
+                        </div>
+                    }
+                </li>
+                <li class="nav-item cart @(currentAction == "Cart" ? "active" : string.Empty)">
+                    <a asp-controller="Home" asp-action="Cart" class="nav-link"><span class="icon icon-shopping_cart"></span><span class="bag d-flex justify-content-center align-items-center"><small>1</small></span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
